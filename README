@@ -1,0 +1,4 @@
+How to run:
+1. Copy the whole folder to your localhost.
+2. Import script.sql in SQL script folder to MySQL database.
+3. open index.php

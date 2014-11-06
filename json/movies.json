@@ -1,0 +1,180 @@
+[
+  {
+    "id": "no-good-deed",
+    "title": "No Good Deed",
+    "rating": "PG-13",
+    "time": "84 min",
+    "genres": [
+      "Thriller"
+    ],
+    "briefSummary": "Terri is a devoted wife and mother of two, living an ideal suburban life in Atlanta when Colin, a charming but dangerous escaped convict, shows up at her door claiming car trouble. Terri offers her phone to help him but soon learns that no good deed goes unpunished as she finds herself fighting for survival when he invades her home and terrorizes her family.",
+    "director": "Sam Miller",
+    "casts": [
+      "Taraji P. Henson",
+      "Idris Elba",
+      "Leslie Bibb", 
+      "Kate del Castillo"
+    ],
+    "image": "no-good-deed.0.jpg"
+  },
+  
+  {
+    "id": "dolphin-tale-2",
+    "title": "Dolphin Tale 2",
+    "rating": "PG",
+    "time": "107 min",
+    "genres": [
+      "Drama",
+      "Family"
+    ],
+    "briefSummary": "The team of people who saved Winter's life reassemble in the wake of her surrogate mother's passing in order to find her a companion so she can remain at the Clearwater Marine Hospital.",
+    "director": "Charles Martin Smith",
+    "casts": [
+      "Morgan Freeman",
+      "Ashley Judd",
+      "Nathan Gamble",
+      "Cozi Zuehlsdorff"
+    ],
+    "image": "dolphin-tale-2.0.jpg"
+  },
+  
+  {
+    "id": "the-drop",
+    "title": "The Drop",
+    "rating": "R",
+    "time": "106 min",
+    "genres": [
+      "Crime",
+      "Drama"
+    ],
+    "briefSummary": "Bob Saginowski finds himself at the center of a robbery gone awry and entwined in an investigation that digs deep into the neighborhood's past where friends, families, and foes all work together to make a living - no matter the cost.",
+    "director": "Michaël R. Roskam",
+    "casts": [
+      "Tom Hardy",
+      "Noomi Rapace",
+      "James Gandolfini",
+      "Matthias Schoenaerts"
+    ],
+    "image": "the-drop.0.jpg"
+  },
+  
+  {
+    "id": "the-skeleton-twins",
+    "title": "The Skeleton Twins",
+    "rating": "R",
+    "time": "93 min",
+    "genres": [
+      "Drama"
+    ],
+    "briefSummary": "Having both coincidentally cheated death on the same day, estranged twins reunite with the possibility of mending their relationship.",
+    "director": "Craig Johnson",
+    "casts": [
+      "Kristen Wiig",
+      "Bill Hader",
+      "Luke Wilson",
+      "Boyd Holbrook"
+    ],
+    "image": "the-skeleton-twins.0.jpg"
+  },
+  
+  {
+    "id": "the-disappearance-of-eleanor-rigby",
+    "title": "The Disappearance of Eleanor Rigby",
+    "rating": "R",
+    "time": "122 min",
+    "genres": [
+      "Drama"
+    ],
+    "briefSummary": "One couple's story as they try to reclaim the life and love they once knew and pick up the pieces of a past that may be too far gone.",
+    "director": "Ned Benson",
+    "casts": [
+      "James McAvoy",
+      "Jessica Chastain",
+      "Viola Davis",
+      "Bill Hader"
+    ],
+    "image": "the-disappearance-of-eleanor-rigby.0.jpg"
+  },
+  
+  {
+    "id": "atlas-shrugged-who-is-john-galt",
+    "title": "Atlas Shrugged: Who Is John Galt?",
+    "rating": "PG-13",
+    "time": "79 min",
+    "genres": [
+      "Drama",
+      "Mystery",
+      "Sci-Fi"
+    ],
+    "briefSummary": "Approaching collapse, the nation's economy is quickly eroding. As crime and fear take over the countryside, the government continues to exert its brutal force against the nation's most productive who are mysteriously vanishing - leaving behind a wake of despair. One man has the answer. One woman stands in his way. Some will stop at nothing to control him. Others will stop at nothing to save him. He swore by his life. They swore to find him. Who is John Galt? ",
+    "director": "James Manera",
+    "casts": [
+      "Kristoffer Polaha",
+      "Laura Regan",
+      "Rob Morrow",
+      "Peter Mackenzie"
+    ],
+    "image": "atlas-shrugged-who-is-john-galt.0.jpg"
+  },
+  
+  {
+    "id": "bird-people",
+    "title": "Bird People",
+    "rating": "PG-15",
+    "time": "127 min",
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Romance"
+    ],
+    "briefSummary": "In an airport hotel on the outskirts of Paris, a Silicon Valley engineer abruptly chucks his job, breaks things off with his wife, and holes up in his room. Soon, fate draws him and a young French maid together. ",
+    "director": "Pascale Ferran",
+    "casts": [
+      "Josh Charles",
+      "Anaïs Demoustier",
+      "Roschdy Zem",
+      "Radha Mitchell"
+    ],
+    "image": "bird-people.0.jpg"
+  },
+  
+  {
+    "id": "swearnet-the-movie",
+    "title": "Swearnet: The Movie",
+    "rating": "NR",
+    "time": "112 min",
+    "genres": [
+      "Comedy"
+    ],
+    "briefSummary": "Fed up with being censored in their post-Trailer Park Boys lives, the out of work stars/world-renowned 'swearists', Mike Smith, Robb Wells and John Paul Tremblay decide to start their own uncensored network on the internet. ",
+    "director": "Warrren P. Sonoda",
+    "casts": [
+      "Mike Smith",
+      "Robb Wells",
+      "John Paul Tremblay",
+      "Patrick Roach"
+    ],
+    "image": "swearnet-the-movie.0.jpg"
+  },
+  
+  {
+    "id": "my-old-lady",
+    "title": "My Old Lady",
+    "rating": "PG-13",
+    "time": "107 min",
+    "genres": [
+      "Comedy",
+      "Drama"
+    ],
+    "briefSummary": "An American inherits an apartment in Paris that comes with an unexpected resident.",
+    "director": "Israel Horovitz",
+    "casts": [
+      "Kevin Kline",
+      "Kristin Scott Thomas",
+      "Maggie Smith",
+      "Michael Burstin"
+    ],
+    "image": "my-old-lady.0.jpg"
+  }
+  
+]
