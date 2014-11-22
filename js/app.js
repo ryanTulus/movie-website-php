@@ -1,5 +1,10 @@
-var app = angular.module('movieApp', []);
+var movieApp = angular.module('movieApp', []);
 
-app.controller('registrationController', function() {
+
+movieApp.controller('movieListCtrl', function($scope, $http) {
+  
+  $http.get('movie-list.php').success(function(data){
+    $scope.moviesData = data;
+  });
   
 });

@@ -132,9 +132,9 @@
              "<img src='images/{$data['id_text']}.0.jpg' class='img-rounded col-sm-12'/>".
              "</div>".
              "<div class='col-sm-9'>".
-             "<div class='panel panel-default'>".
+             "<div class='panel panel-info'>".
              "<div class='panel-heading panel-title'>".
-              "<a href='movie.php?id={$data['id_text']}'><p class='text-primary'>{$data['title']}</p></a>".
+              "<p class='text-primary'>{$data['title']}</p>".
              "</div> ".
              "<div class='panel-body'>".
              "<p><strong>Time :</strong> {$data['time']} min </p> ".
@@ -166,5 +166,12 @@
       }
     ?>
   
+    <!-- Review -->
+    <div class="col-sm-offset-3 col-sm-9">
+      <p class="text-success">Movie Review</p>
+      
+    </div>
+    
+    
   </body>
 </html>

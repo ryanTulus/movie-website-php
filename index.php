@@ -43,8 +43,7 @@
         <form class="navbar-form navbar-right" role="search" action="index.php">
           <div class="input-group">
             
-            <input type="text" class="form-control" placeholder="Search Movies" 
-                   name="srch-term" id="srch-term" value="<?php echo $_GET['srch-term'];?>" />
+            <input type="text" class="form-control" placeholder="Search Movies" ng-model='query'/>
             
             <div class="input-group-btn">
               <button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
@@ -57,71 +56,42 @@
     </nav>
 
     <!--  movie list  -->
-    <?php
-      $dbhost = 'localhost';
-      $dbuser = 'root';
-      $dbpass = 'root';
-      $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-      if(! $conn )
-      {
-        die('Could not connect: ' . mysql_error());
-      }
-      $keyword = htmlspecialchars($_GET["srch-term"]);
-      $sql = "SELECT * FROM movie_item WHERE title like '%$keyword%'";
-
-      mysql_select_db('movies');
-      $retval = mysql_query( $sql, $conn );
-      if(! $retval )
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-      while($row = mysql_fetch_assoc($retval))
-      {
-        $movieID = $row['id'];
-        $sql = "SELECT genres.name ". 
-               "FROM movie_genres INNER JOIN genres ".
-               "ON movie_genres.genre_id = genres.id ".
-               "WHERE movie_genres.movie_id = '$movieID';";
-               
-        $genres = mysql_query($sql, $conn);
-        if(!$genres)
-        {
-          die('Could not get data: ' . mysql_error());
-        }
-        printMovieList($row, $genres);
-      }
-      mysql_close($conn);
-      
-      function printMovieList($data, $genres) {
+    <div class='col-sm-12'ng-controller='movieListCtrl'>
+      <div class='row' ng-repeat='movieData in moviesData | filter:query'>
         
-        while ($row = mysql_fetch_assoc($genres)) {
-          if (!$genre) {
-            $genre = $row['name'];
-          } else {
-            $genre = $genre . ' | ' . $row['name'];
-          } 
-        }
+        <div class='panel'>
+          <div class='panel-body'>
+            
+            <!-- movie image -->
+            <div class='col-sm-2'>
+              <img ng-src="images/{{movieData.movie.id_text}}.0.jpg" class='img-rounded col-sm-12'></img>
+            </div>
+          
+            <!-- movie details -->
+            <div class='col-sm-10'>
+              <div class='panel panel-info'>
+                
+                <div class='panel-heading panel-title'>
+                  <a href="movie.php?id={{movieData.movie.id_text}}">
+                    <p class='text-info'>{{movieData.movie.title}}</p>
+                  </a>
+                </div>
+              
+                <div class='panel-body'>
+                  <p>Time : {{movieData.movie.time}} min</p>
+                  <p>Rating : {{movieData.movie.rating}}</p>
+                  <p>Genres : <span ng-repeat='genre in movieData.genre'><span ng-hide='$first'> | </span>{{genre}}</span></p>
+                  <p>{{movieData.movie.brief_summary}}</p>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
         
-        echo "<div class='row col-sm-12'>".
-             "<div class='panel'>".
-             "<div class='panel-body'>".
-             "<div class='col-sm-2'>".
-             "<img src='images/{$data['id_text']}.0.jpg' class='img-rounded col-sm-12'/>".
-             "</div>".
-             "<div class='col-sm-10'>".
-             "<div class='panel panel-default'>".
-             "<div class='panel-heading panel-title'>".
-              "<a href='movie.php?id={$data['id_text']}'><p class='text-primary'>{$data['title']}</p></a>".
-             "</div> ".
-             "<div class='panel-body'>".
-             "<p>Time : {$data['time']} min </p> ".
-             "<p>Rating : {$data['rating']} </p> ".
-             "<p>Genres : {$genre} </p>".
-             "<p>{$data['brief_summary']} </p>".
-             "</div></div></div></div></div></div>";
-      }
-    ?>
-
+      </div>
+    </div>
 
   </body>
 </html>
