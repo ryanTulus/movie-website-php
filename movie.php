@@ -20,7 +20,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='movieApp'>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,6 +41,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="js/app.js"></script>
   </head>
   
   <body>
@@ -55,8 +57,8 @@
         <p class="navbar-text">Your Own Trusted Movie Guideline!</p>
         
         <form class='navbar-form navbar-right'>
-          <button class='btn btn-primary'>Register</button>
-          <button class='btn btn-success'>Sign In</button>
+          <a class='btn btn-primary' href='register.php'>Register</a>
+          <a class='btn btn-success' href='signin.php'>Sign In</a>
         </form>
         
       </div>
@@ -125,17 +127,14 @@
         $row = mysql_fetch_assoc($director);
         $director = $row['name'];
         
-        echo "<div>".
-             "<div class='panel'>".
-             "<div class='panel-body'>".
-             "<div class='col-sm-3'>".
+        echo "<div class='col-sm-3'>".
              "<img src='images/{$data['id_text']}.0.jpg' class='img-rounded col-sm-12'/>".
              "</div>".
              "<div class='col-sm-9'>".
              "<div class='panel panel-info'>".
              "<div class='panel-heading panel-title'>".
               "<p class='text-primary'>{$data['title']}</p>".
-             "</div> ".
+             "</div>".
              "<div class='panel-body'>".
              "<p><strong>Time :</strong> {$data['time']} min </p> ".
              "<p><strong>Rating :</strong> {$data['rating']} </p> ".
@@ -161,15 +160,22 @@
         }
         
         echo "</ul>".
-             "</div></div></div></div></div></div>";
+             "</div></div></div>";
         
       }
     ?>
   
     <!-- Review -->
     <div class="col-sm-offset-3 col-sm-9">
-      <p class="text-success">Movie Review</p>
-      
+      <div class='panel panel-warning'>
+        <div class='panel-heading panel-title'>
+          <p class='text-warning'>Movie Review</p>
+        </div>
+        
+        <div class='panel-body'>
+          <p>No Review!!</p>
+        </div>
+      </div>
     </div>
     
     

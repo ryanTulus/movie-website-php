@@ -23,6 +23,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/match.js"></script>
+    
   </head>
   
   <body>
@@ -47,33 +49,61 @@
         
         <div class="form-group">
           <label class="col-md-2 control-label">Full Name</label>
-          <div class="col-md-8">
-            <input type="text" class="col-md-10 form-control" placeholder="Your Name" 
-                   name='fullname' ng-model="reg.name" required>
+          <div ng-class="{'col-md-8':true,
+                          'has-success has-feedback': regForm.fullname.$valid && regForm.fullname.$dirty,
+                          'has-error has-feedback': regForm.fullname.$invalid && regForm.fullname.$dirty}">
+            <input type="text" class="col-md-10 form-control" placeholder="Your Name" name='fullname' 
+                   ng-model="name" ng-model-options="{updateOn: 'blur', debounce: {blur:500}}" required></input>
+            <span ng-show="regForm.fullname.$valid && regForm.fullname.$dirty" 
+                  class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-show="regForm.fullname.$invalid && regForm.fullname.$dirty" 
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-md-2 control-label">Email Address</label>
-          <div class="col-md-8">
-            <input type="email" class="col-md-10 form-control" placeholder="Your Email" 
-                   ng-model="reg.email" required>
+          <div ng-class="{'col-md-8':true,
+                          'has-success has-feedback': regForm.email.$valid && regForm.email.$dirty,
+                          'has-error has-feedback': regForm.email.$invalid && regForm.email.$dirty}">
+            <input type="email" class="col-md-10 form-control" placeholder="Your Email" name='email'
+                   ng-model="email" ng-model-options="{updateOn: 'blur', debounce: {blur:500}}" required></input>
+            <span ng-show="regForm.email.$valid && regForm.email.$dirty"
+                  class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-show="regForm.email.$invalid && regForm.email.$dirty" 
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-md-2 control-label">Password</label>
-          <div class="col-md-8">
-            <input type="password" class="col-md-10 form-control" placeholder="Password"
-                   ng-model="reg.password" ng-minlength='6' required>
+          <div ng-class="{'col-md-8':true, 
+                          'has-success has-feedback': regForm.password.$valid && regForm.password.$dirty,
+                          'has-error has-feedback': regForm.password.$invalid && regForm.password.$dirty}">
+            <input type="password" class="col-md-10 form-control" placeholder="Password" ng-minlength='6' name='password'
+                   ng-model="password" ng-model-options="{updateOn: 'blur', debounce: {blur:500}}" required></input>
+            <span ng-show="regForm.password.$valid && regForm.password.$dirty"
+                  class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-show="regForm.password.$invalid && regForm.password.$dirty" 
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class='error' ng-show='regForm.password.$error.minlength'>Password has to be at least 6 characters.</div>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-md-2 control-label">Confirm Password</label>
-          <div class="col-md-8">
-            <input type="password" class="col-md-10 form-control" placeholder="Confirm Password"
-                   ng-model="reg.confirmPassword" ng-minlength='6' required>
+          <div ng-class="{'col-md-8':true, 
+                          'has-success has-feedback': regForm.confirm.$valid && regForm.confirm.$dirty,
+                          'has-error has-feedback': regForm.confirm.$invalid && regForm.confirm.$dirty}">
+            <input type="password" class="col-md-10 form-control" placeholder="Confirm Password" 
+                   ng-model="confirmPassword" ng-model-options="{updateOn: 'blur', debounce: {blur:500}}"
+                   ng-minlength='6' match='password' name='confirm' required></input>
+            <span ng-show="regForm.confirm.$valid && regForm.confirm.$dirty"
+                  class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-show="regForm.confirm.$invalid && regForm.confirm.$dirty" 
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class='error' ng-show='regForm.confirm.$error.minlength'>Confirm password has to be at least 6 characters.</div>
+            <div class='error' ng-show='regForm.confirm.$error.match && regForm.password.$dirty'>Confirm password do not match with password.</div>
           </div>
         </div>
         
