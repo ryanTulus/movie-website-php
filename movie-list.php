@@ -38,7 +38,7 @@
       $genre[] = $r['name'];
     }
     
-    $arr[] = array('movie' => $movie, 'genre' => $genre);
+    $arr[] = array('movie' => $movie, 'genres' => $genre);
   }
   
   // encode array into json, numeric object will stay as numeric instead of becoming string

@@ -1,32 +1,14 @@
-<?php
-  $dbhost = 'localhost';
-  $dbuser = 'root';
-  $dbpass = 'root';
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-  if(! $conn )
-  {
-    die('Could not connect: ' . mysql_error());
-  }
-  $id = htmlspecialchars($_GET["id"]);
-  $sql = "SELECT * FROM movie_item WHERE id_text = '$id'";
-
-  mysql_select_db('movies');
-  $retval = mysql_query( $sql, $conn );
-  if(! $retval )
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  $row = mysql_fetch_assoc($retval);
-?>
-
 <!DOCTYPE html>
 <html lang="en" ng-app='movieApp'>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movie: <?php echo "{$row['title']}"?></title>
-
+    
+    <title ng-controller='movieDetailCtrl' idtext="<?php echo htmlspecialchars($_GET["id"]) ?>">
+      Movie: {{movieDetail.movie.title}}
+    </title>
+    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -41,12 +23,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    
   </head>
   
   <body>
-  
     <!--  header navigation bar   -->
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
@@ -65,107 +49,44 @@
     </nav>
     
     <!--  movie list  -->
-    <?php
-      $movieID = $row['id'];
-      $directorID = $row['director'];
-      $sql = "SELECT genres.name ". 
-             "FROM movie_genres INNER JOIN genres ".
-             "ON movie_genres.genre_id = genres.id ".
-             "WHERE movie_genres.movie_id = '$movieID';";
-           
-      $genres = mysql_query($sql, $conn);
-      if(!$genres)
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-      
-      $sql = "SELECT people.name ".
-             "FROM movie_writers INNER JOIN people ".
-             "ON movie_writers.people_id = people.id ".
-             "WHERE movie_writers.movie_id = '$movieID';";
-             
-      $writers = mysql_query($sql, $conn);
-      if (!$writers)
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-      
-      $sql = "SELECT people.name ".
-             "FROM movie_casts INNER JOIN people ".
-             "ON movie_casts.people_id = people.id ".
-             "WHERE movie_casts.movie_id = '$movieID';";
-      
-      $casts = mysql_query($sql, $conn);
-      if (!$casts)
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-
-      $sql = "SELECT name ".
-             "FROM people ".
-             "WHERE id = '$directorID';";
-      
-      $director = mysql_query($sql, $conn);
-      if (!$director)
-      {
-        die('Could not get data: ' . mysql_error());
-      }
-
-      printMovieDetails($row, $genres, $writers, $casts, $director);
-
-      mysql_close($conn);
-      
-      function printMovieDetails($data, $genres, $writers, $casts, $director) {
-        
-        while ($row = mysql_fetch_assoc($genres)) {
-          if (!$genre) {
-            $genre = $row['name'];
-          } else {
-            $genre = $genre . ' | ' . $row['name'];
-          } 
-        }
-        $row = mysql_fetch_assoc($director);
-        $director = $row['name'];
-        
-        echo "<div class='col-sm-3'>".
-             "<img src='images/{$data['id_text']}.0.jpg' class='img-rounded col-sm-12'/>".
-             "</div>".
-             "<div class='col-sm-9'>".
-             "<div class='panel panel-info'>".
-             "<div class='panel-heading panel-title'>".
-              "<p class='text-primary'>{$data['title']}</p>".
-             "</div>".
-             "<div class='panel-body'>".
-             "<p><strong>Time :</strong> {$data['time']} min </p> ".
-             "<p><strong>Rating :</strong> {$data['rating']} </p> ".
-             "<p><strong>Genres :</strong> {$genre} </p>".
-             "<strong>Storyline:</strong>".
-             "<p>{$data['storyline']} </p>".
-             "<p><strong>Director :</strong> {$director} </p>";
-        
-        while ($row = mysql_fetch_assoc($writers)) {
-          if (!$writer) {
-            $writer = $row['name'];
-          } else {
-            $writer = $writer . ', ' . $row['name'];
-          } 
-        }
-        
-        echo "<p><strong>Writers :</strong> {$writer} </p>".
-             "<strong>Casts:</strong>".
-             "<ul>";
-             
-        while ($row = mysql_fetch_assoc($casts)) {
-          echo "<li>{$row['name']}</li>";
-        }
-        
-        echo "</ul>".
-             "</div></div></div>";
-        
-      }
-    ?>
+    <div ng-controller='movieDetailCtrl' idtext="<?php echo htmlspecialchars($_GET["id"]) ?>">
+      <div class='col-sm-3'>
+        <img ng-src="images/{{movieDetail.movie.id_text}}.0.jpg" class='img-rounded col-sm-12'/>
+      </div>
   
-    <!-- Review -->
+      <div class='col-sm-9'>
+        <div class='panel panel-info'>
+          <div class='panel-heading panel-title'>
+            <p class='text-primary'>{{movieDetail.movie.title}}</p>
+          </div>
+          <div class='panel-body'>
+            <p><strong>Time :</strong> {{movieDetail.movie.time}} min</p>
+            <p><strong>Rating :</strong> {{movieDetail.movie.rating}}</p>
+            <p>
+              <strong>Genres :</strong>
+              <span ng-repeat='genre in movieDetail.genres'>
+                <span ng-hide='$first'> | </span>{{genre}}
+              </span>
+            </p>
+            <strong>Storyline :</strong>
+            <p>{{movieDetail.movie.storyline}}</p>
+            <p><strong>Director :</strong> {{movieDetail.director}}</p>
+            <p>
+              <strong>Writers :</strong>
+              <span ng-repeat='writer in movieDetail.writers'>
+                <span ng-hide='$first'>, </span>{{writer}}
+              </span>
+            </p>
+            <Strong>Casts:</strong>
+            <ul ng-repeat="cast in movieDetail.casts">
+              <li>{{cast}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Movie Review -->
     <div class="col-sm-offset-3 col-sm-9">
       <div class='panel panel-warning'>
         <div class='panel-heading panel-title'>
@@ -173,7 +94,7 @@
         </div>
         
         <div class='panel-body'>
-          <p>No Review!!</p>
+          <p>This feature is coming soon! =)</p>
         </div>
       </div>
     </div>

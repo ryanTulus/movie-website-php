@@ -21,9 +21,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-route.min.js"></script>
+    
     <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/match.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="js/directives.js"></script>
     
   </head>
   
@@ -44,7 +47,7 @@
     
     <div class="col-md-10">
       <form class="form-horizontal" role="form" name="regForm"
-            ng-controller="registrationController as reg"
+            ng-controller="registrationCtrl as reg"
             ng-submit="regForm.$valid && reg.register()">
         
         <div class="form-group">

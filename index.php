@@ -20,8 +20,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular-route.min.js"></script>
+    
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    
   </head>
   
   <body>
@@ -80,7 +84,7 @@
                 <div class='panel-body'>
                   <p>Time : {{movieData.movie.time}} min</p>
                   <p>Rating : {{movieData.movie.rating}}</p>
-                  <p>Genres : <span ng-repeat='genre in movieData.genre'><span ng-hide='$first'> | </span>{{genre}}</span></p>
+                  <p>Genres : <span ng-repeat='genre in movieData.genres'><span ng-hide='$first'> | </span>{{genre}}</span></p>
                   <p>{{movieData.movie.brief_summary}}</p>
                 </div>
                 

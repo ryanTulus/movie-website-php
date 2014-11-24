@@ -1,21 +1,18 @@
-var movieApp = angular.module('movieApp', []);
+var movieApp = angular.module('movieApp', ['ngRoute', 'movieControllers']);
 
-
-movieApp.controller('movieListCtrl', function($scope, $http) {
-  
-  $http.get('movie-list.php').success(function(data) {
-    $scope.moviesData = data;
-  });
-  
-});
-
-movieApp.controller('movieDetailCtrl', function($scope, $http) {
-  
-  $http.get('movie-details.php').success(function(data) {
-    $scope.movieDetail = data
-  });
-});
-
-movieApp.controller('registrationController', function() {
-  
-});
+// movieApp.config(['$routeProvider', function($routeProvider) {
+//
+//   $routeProvider.when('/movies', {
+//     templateUrl: 'index.php'
+//     controller: 'MovieListCtrl'
+//   }).when('movie/:movieID', {
+//     templateUrl: ''
+//     controller: ''
+//   }).when('/register', {
+//     templateUrl: 'register.php'
+//     controller: 'RegistrationCtrl'
+//   })otherwise({
+//     redirectTo: '/movies'
+//   });
+//
+// }]);
