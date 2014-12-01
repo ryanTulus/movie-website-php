@@ -76,7 +76,7 @@
               <div class='panel panel-info'>
                 
                 <div class='panel-heading panel-title'>
-                  <a href="movie.php?id={{movieData.movie.id_text}}">
+                  <a href="movie-info.php?id={{movieData.movie.id_text}}">
                     <p class='text-info'>{{movieData.movie.title}}</p>
                   </a>
                 </div>

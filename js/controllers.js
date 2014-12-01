@@ -20,3 +20,7 @@ movieControllers.controller('movieDetailCtrl', function($scope, $http, $attrs) {
 movieControllers.controller('registrationCtrl', function() {
   
 });
+
+movieControllers.controller('reviewCtrl', function() {
+  
+});

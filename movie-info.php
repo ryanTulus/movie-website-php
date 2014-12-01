@@ -77,7 +77,7 @@
                 <span ng-hide='$first'>, </span>{{writer}}
               </span>
             </p>
-            <Strong>Casts:</strong>
+            <strong>Casts:</strong>
             <ul ng-repeat="cast in movieDetail.casts">
               <li>{{cast}}</li>
             </ul>
@@ -94,7 +94,40 @@
         </div>
         
         <div class='panel-body'>
-          <p>This feature is coming soon! =)</p>
+          
+          <div class'col-sm-12'>
+            No review yet!
+          </div>
+          <hr>
+          <h3 class='text-center text-warning'>Add Review</h3>
+          <div class='col-sm-6'>
+            <form role='form'>
+              <div class='form-group'>
+                <label class='control-label'><span class='text-warning'>Summary</span></label>
+                <input class='form-control'></input>
+              </div>
+              
+              <div class='form-group'>
+                <label class='control-label'><span class='text-warning'>Rating:</span></label>
+                <select class='form-control' name="rating">
+                  <option value="0">Rate the movie</option>
+                  <option value="5">5 stars</option>
+                  <option value="4">4 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="2">2 stars</option>
+                  <option value="1">1 stars</option>
+                </select>
+              </div>
+              
+              <div class='form-group'>
+                <label class='control-label'><span class='text-warning'>Review:</span></label>
+                <textarea class='form-control' rows='5'></textarea>
+              </div>
+              
+              <div class='form-group'>
+                <button type='submit' class='btn btn-warning'>Submit Review</button>
+              </div>
+          </div>
         </div>
       </div>
     </div>
