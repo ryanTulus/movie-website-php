@@ -61,14 +61,14 @@
 
     <!--  movie list  -->
     <div class='col-sm-12'ng-controller='movieListCtrl'>
-      <div class='row' ng-repeat='movieData in moviesData | filter:query'>
+      <div class='row' ng-repeat='movie in movies | filter:query'>
         
         <div class='panel'>
           <div class='panel-body'>
             
             <!-- movie image -->
             <div class='col-sm-2'>
-              <img ng-src="images/{{movieData.movie.id_text}}.0.jpg" class='img-rounded col-sm-12'></img>
+              <img ng-src="images/{{movie.id_text}}.0.jpg" class='img-rounded col-sm-12'></img>
             </div>
           
             <!-- movie details -->
@@ -76,16 +76,16 @@
               <div class='panel panel-info'>
                 
                 <div class='panel-heading panel-title'>
-                  <a href="movie-info.php?id={{movieData.movie.id_text}}">
-                    <p class='text-info'>{{movieData.movie.title}}</p>
+                  <a href="movie-info.php?id={{movie.id_text}}">
+                    <p class='text-info'>{{movie.title}}</p>
                   </a>
                 </div>
               
                 <div class='panel-body'>
-                  <p>Time : {{movieData.movie.time}} min</p>
-                  <p>Rating : {{movieData.movie.rating}}</p>
-                  <p>Genres : <span ng-repeat='genre in movieData.genres'><span ng-hide='$first'> | </span>{{genre}}</span></p>
-                  <p>{{movieData.movie.brief_summary}}</p>
+                  <p>Time : {{movie.time}} min</p>
+                  <p>Rating : {{movie.rating}}</p>
+                  <p>Genres : <span ng-repeat='genre in movie.genres'><span ng-hide='$first'> | </span>{{genre}}</span></p>
+                  <p>{{movie.brief_summary}}</p>
                 </div>
                 
               </div>

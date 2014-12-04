@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title ng-controller='movieDetailCtrl' idtext="<?php echo htmlspecialchars($_GET["id"]) ?>">
-      Movie: {{movieDetail.movie.title}}
+      Movie: {{movieDetail.title}}
     </title>
     
     <!-- Bootstrap -->
@@ -51,17 +51,17 @@
     <!--  movie list  -->
     <div ng-controller='movieDetailCtrl' idtext="<?php echo htmlspecialchars($_GET["id"]) ?>">
       <div class='col-sm-3'>
-        <img ng-src="images/{{movieDetail.movie.id_text}}.0.jpg" class='img-rounded col-sm-12'/>
+        <img ng-src="images/{{movieDetail.id_text}}.0.jpg" class='img-rounded col-sm-12'/>
       </div>
   
       <div class='col-sm-9'>
         <div class='panel panel-info'>
           <div class='panel-heading panel-title'>
-            <p class='text-primary'>{{movieDetail.movie.title}}</p>
+            <p class='text-primary'>{{movieDetail.title}}</p>
           </div>
           <div class='panel-body'>
-            <p><strong>Time :</strong> {{movieDetail.movie.time}} min</p>
-            <p><strong>Rating :</strong> {{movieDetail.movie.rating}}</p>
+            <p><strong>Time :</strong> {{movieDetail.time}} min</p>
+            <p><strong>Rating :</strong> {{movieDetail.rating}}</p>
             <p>
               <strong>Genres :</strong>
               <span ng-repeat='genre in movieDetail.genres'>
@@ -69,7 +69,7 @@
               </span>
             </p>
             <strong>Storyline :</strong>
-            <p>{{movieDetail.movie.storyline}}</p>
+            <p>{{movieDetail.storyline}}</p>
             <p><strong>Director :</strong> {{movieDetail.director}}</p>
             <p>
               <strong>Writers :</strong>

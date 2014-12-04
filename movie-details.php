@@ -1,84 +1,52 @@
 <?php
-  $dbhost = 'localhost';
-  $dbuser = 'root';
-  $dbpass = 'root';
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-  if(! $conn )
-  {
-    die('Could not connect: ' . mysql_error());
-  }
-  $id = htmlspecialchars($_GET["id"]);
-  $sql = "SELECT * FROM movie_item WHERE id_text = '$id'";
 
-  mysql_select_db('movies');
-  $retval = mysql_query( $sql, $conn );
-  if(! $retval )
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  $movie = mysql_fetch_assoc($retval);
+  // error reporting
+  ini_set('display_startup_errors',1);
+  ini_set('display_errors',1);
+  error_reporting(-1);
+
+  // include configuration
+  require_once(dirname(__FILE__) . "/conf/config.php");
+  require_once(dirname(__FILE__) . "/model/movie.php");
+
+
+  $db = new DatabaseLayer();
+  $db->connectToDB();
+
+  $id = htmlspecialchars($_GET["id"]);
+  $movies = $db->get_movie_details_by_movie_id_text($id);
   
-  $movieID = $movie['id'];
-  $directorID = $movie['director'];
-  $sql = "SELECT genres.name ". 
-         "FROM movie_genres INNER JOIN genres ".
-         "ON movie_genres.genre_id = genres.id ".
-         "WHERE movie_genres.movie_id = '$movieID';";
-       
-  $genres = mysql_query($sql, $conn);
-  if(!$genres)
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  $genre = array();
-  while ($r = mysql_fetch_assoc($genres)) {
-    $genre[] = $r['name'];
-  }
-  
-  $sql = "SELECT people.name ".
-         "FROM movie_writers INNER JOIN people ".
-         "ON movie_writers.people_id = people.id ".
-         "WHERE movie_writers.movie_id = '$movieID';";
-         
-  $writers = mysql_query($sql, $conn);
-  if (!$writers)
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  $writer = array();
-  while ($r = mysql_fetch_assoc($writers)) {
-    $writer[] = $r['name'];
+  $m = $movies[0];
+  $movie = new Movie($m);
+  $movieID = $m->id;
+  $directorID = $m->director;
+
+  // genres
+  $genres = $db->get_movie_genres_by_movie_id($movieID);
+
+  foreach ($genres as $genre) {
+    $movie->addGenre($genre->name);
   }
   
-  $sql = "SELECT people.name ".
-         "FROM movie_casts INNER JOIN people ".
-         "ON movie_casts.people_id = people.id ".
-         "WHERE movie_casts.movie_id = '$movieID';";
-  
-  $casts = mysql_query($sql, $conn);
-  if (!$casts)
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  $cast = array();
-  while ($r = mysql_fetch_assoc($casts)) {
-    $cast[] = $r[name];
+  // writers
+  $writers = $db->get_movie_writers_by_movie_id($movieID);
+
+  foreach ($writers as $writer) {
+    $movie->addWriter($writer->name);
   }
   
-  $sql = "SELECT name ".
-         "FROM people ".
-         "WHERE id = '$directorID';";
-  
-  $director = mysql_query($sql, $conn);
-  if (!$director)
-  {
-    die('Could not get data: ' . mysql_error());
+  // casts
+  $casts = $db->get_movie_casts_by_movie_id($movieID);
+
+  foreach ($casts as $cast) {
+    $movie->addCast($cast->name);
   }
-  $row = mysql_fetch_assoc($director);
-  $director = $row['name'];
   
-  $arr = array('movie' => $movie, 'genres' => $genre, 'writers' => $writer, 'casts' => $cast, 'director' => $director);
+  // director
+  $director = $db->get_movie_director_by_director_id($directorID);
+
+  $movie->setDirector($director[0]->name);
   
-  echo json_encode($arr, JSON_NUMERIC_CHECK);
+  echo json_encode($movie, JSON_NUMERIC_CHECK);
 
 ?>

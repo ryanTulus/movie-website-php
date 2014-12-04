@@ -1,48 +1,36 @@
 <?php
-  $dbhost = 'localhost';
-  $dbuser = 'root';
-  $dbpass = 'root';
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-  if(! $conn )
-  {
-    die('Could not connect: ' . mysql_error());
-  }
-  $keyword = htmlspecialchars($_GET["srch-term"]);
-  $sql = "SELECT * FROM movie_item WHERE title like '%$keyword%'";
+  
+  // error reporting
+  ini_set('display_startup_errors',1);
+  ini_set('display_errors',1);
+  error_reporting(-1);
 
-  mysql_select_db('movies');
-  $retval = mysql_query( $sql, $conn );
-  if(! $retval )
-  {
-    die('Could not get data: ' . mysql_error());
-  }
-  
+  // include configuration
+  require_once(dirname(__FILE__) . "/conf/config.php");
+  require_once(dirname(__FILE__) . "/model/movie.php");
+
+
+  $db = new DatabaseLayer();
+  $db->connectToDB();
+
+  $movieList = $db->get_movie_list();
+
   $arr = array();
-  while($row = mysql_fetch_assoc($retval))
-  {
-    $movie = $row;
-    $movieID = $row['id'];
-    $sql = "SELECT genres.name ". 
-           "FROM movie_genres INNER JOIN genres ".
-           "ON movie_genres.genre_id = genres.id ".
-           "WHERE movie_genres.movie_id = '$movieID';";
-           
-    $genres = mysql_query($sql, $conn);
-    if(!$genres)
-    {
-      die('Could not get data: ' . mysql_error());
+
+  foreach($movieList as $m) {
+    $genres = $db->get_movie_genres_by_movie_id($m->id);
+    $movie = new Movie($m);
+    foreach ($genres as $genre) {
+      $movie->addGenre($genre->name);
     }
     
-    $genre = array();
-    while ($r = mysql_fetch_assoc($genres)) {
-      $genre[] = $r['name'];
-    }
-    
-    $arr[] = array('movie' => $movie, 'genres' => $genre);
+    $arr[] = $movie;
   }
+
   
+  $db->closeDB();
+
   // encode array into json, numeric object will stay as numeric instead of becoming string
   echo json_encode($arr, JSON_NUMERIC_CHECK);
   
-  mysql_close($conn);
 ?>  
